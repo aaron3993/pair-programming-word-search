@@ -21,26 +21,45 @@ const wordSearch = (letters, word) => {
             }
         }
     }
-    // const diagonalJoin = letters.map(ls => ls.join(''));
+    const diagonalJoin = letters.map(ls => ls.join(''));
     // if (diagonalJoin) {
-    //     const mainArray = []
-    //     for (let i = 0; i < diagonalJoin.length; i++) {
-    //         let longestLength = diagonalJoin.length
-    //         if (diagonalJoin[i].length > longestLength) {
-    //             longestLength = diagonalJoin[i].length
-    //         }
-    //         for (let j = 0; j < longestLength; i++, j++) {
-    //             const subArray = []
-    //             subArray.push(diagonalJoin[i][j])
-    //             mainArray.push(subArray)
-    //             let newString = subArray.join('')
-    //             if (newString.includes(word)) {
-    //                 return true
-    //             }
-    //         }
-    //         console.log(subArray)
-    //     }
-    // }
-    return false;
-};
+        // const mainArray = []
+        for (let i = 0; i < diagonalJoin.length; i++) {
+            const subArray1 = []
+            const subArray2 = []
+            let I = i
+            // I is always initialized as the current i value for each iteration of i, but will increment in the j loop without incrementing the original i
+            let diagonalLength = diagonalJoin.length - I
+            // The length of each check 
+            for (let j = 0; j < diagonalLength; j++, I++) {
+                subArray1.push(diagonalJoin[I][j])
+                // console.log(subArray1)
+                subArray2.push(diagonalJoin[j][I])
+                let newString = subArray1.join('')
+                let newString2 = subArray2.join('')
+                // console.log(newString2)
+                // console.log(reversedWord)
+                if (newString.includes(word || reversedWord) || newString2.includes(word || reversedWord)) {
+                    return true
+                }
+            }
+            // mainArray.push(subArray)
+            // mainArray.push(subArray2)
+        }
+        // console.log(mainArray)
+        return false;
+    }
+// };
 module.exports = wordSearch;
+
+console.log(wordSearch([
+    ['A', 'W', 'C', 'F', 'Q', 'U', 'A', 'L'],
+    ['S', 'E', 'I', 'N', 'F', 'E', 'L', 'D'],
+    ['Y', 'F', 'C', 'F', 'Q', 'U', 'A', 'L'],
+    ['H', 'M', 'J', 'T', 'E', 'V', 'R', 'G'],
+    ['W', 'H', 'C', 'S', 'Y', 'E', 'R', 'L'],
+    ['B', 'F', 'R', 'E', 'N', 'E', 'Y', 'B'],
+    ['U', 'B', 'T', 'W', 'A', 'P', 'A', 'I'],
+    ['O', 'D', 'C', 'A', 'K', 'U', 'A', 'S'],
+    ['E', 'Z', 'K', 'F', 'Q', 'U', 'A', 'L'],
+  ], 'LLU'))
